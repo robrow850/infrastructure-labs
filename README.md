@@ -1,31 +1,28 @@
 # Infrastructure Labs
 
-Robert Rowan's infrastructure learning notebook. Status: planned; no infrastructure
-has been deployed or validated by this repository.
+Robert Rowan's infrastructure practice projects. Runnable configuration examples are
+provided, but no Azure resources have been deployed for this portfolio.
 
-## Start a lab
+| Project | Files | Validation scope |
+| --- | --- | --- |
+| Local Terraform | [terraform/local](terraform/local/) | Built-in terraform_data example; no cloud resources |
+| Azure Terraform | [terraform/azure](terraform/azure/) | Disposable resource-group configuration; no tenant execution |
+| Azure Bicep | [azure](azure/) | Alternative subscription-scoped resource group; requires Azure tooling |
+| GitHub Actions | [.github/workflows/validate.yml](.github/workflows/validate.yml) | Terraform fmt/init/validate; no credentials and no apply |
+| Lab evidence | [LAB-TEMPLATE.md](LAB-TEMPLATE.md) | Record actual steps, observations and cleanup |
 
-Copy [LAB-TEMPLATE.md](LAB-TEMPLATE.md) to a descriptive lab name and record only
-what you actually run and observe. Keep credentials and real environment details
-out of this repository.
+Start with the [Terraform instructions](terraform/README.md) and [Azure instructions](azure/README.md).
+The development Mac has neither Terraform nor Azure CLI installed; local compile/validate
+was not performed. GitHub workflow results are separate evidence, not proof of deployment.
+The Azure context check requires Az.Accounts and an explicitly chosen subscription.
 
-Suggested first exercise: provision an isolated disposable local VM, document its
-OS and resource budget, inventory it with read-only commands, and verify cleanup.
-Record exact setup steps, expected and observed outcomes, sanitized evidence,
-cleanup results, and limitations. Select the platform before adding executable setup.
+Never commit state, credentials or private configuration. Use a disposable test environment
+and choose one owner (Terraform or Bicep) for a given resource. No auto-deploy is configured.
 
-## Planned progression
+Sources: [Terraform AzureRM resource group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group),
+[Microsoft Bicep resource-group schema](https://learn.microsoft.com/en-us/azure/templates/microsoft.resources/2024-03-01/resourcegroups),
+[Terraform setup action](https://github.com/hashicorp/setup-terraform).
 
-1. Local VM setup, network isolation and cleanup.
-2. Repeatable guest configuration with observable validation.
-3. Infrastructure as code in a selected test environment.
-
-These are future exercises, not completed projects. No deployment commands are supplied.
-
-## Related portfolio
-
-- [Entra Automation Toolkit](https://github.com/robrow850/entra-automation-toolkit)
-- [PowerShell automation](https://github.com/robrow850/powershell-automation)
-- [Python automation](https://github.com/robrow850/python-automation)
-
-This notebook continues the initial infrastructure template seeded in the toolkit.
+Related: [Entra toolkit](https://github.com/robrow850/entra-automation-toolkit),
+[PowerShell labs](https://github.com/robrow850/powershell-automation),
+[Python labs](https://github.com/robrow850/python-automation).
