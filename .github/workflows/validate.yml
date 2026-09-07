@@ -19,3 +19,16 @@ jobs:
       - run: terraform fmt -check
       - run: terraform init -backend=false -input=false
       - run: terraform validate
+  bicep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile Bicep without Azure login
+        run: az bicep build --file azure/main.bicep
+      - name: Check PowerShell preflight syntax
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          $null = [System.Management.Automation.Language.Parser]::ParseFile("$PWD/azure/Test-AzureContext.ps1", [ref]$tokens, [ref]$errors)
+          if ($errors.Count) { throw ($errors -join "`n") }
